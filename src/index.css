@@ -4,24 +4,24 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: 222 20% 6%;
+  --color-background: 220 25% 5%;
   --color-foreground: 210 40% 92%;
-  --color-card: 222 20% 9%;
+  --color-card: 220 22% 8%;
   --color-card-foreground: 210 40% 92%;
-  --color-popover: 222 25% 8%;
+  --color-popover: 220 25% 7%;
   --color-popover-foreground: 210 40% 92%;
   --color-primary: 190 95% 50%;
   --color-primary-foreground: 222 20% 6%;
-  --color-secondary: 222 15% 16%;
+  --color-secondary: 220 18% 14%;
   --color-secondary-foreground: 210 40% 92%;
-  --color-muted: 222 15% 14%;
-  --color-muted-foreground: 215 20% 55%;
-  --color-accent: 222 15% 16%;
+  --color-muted: 220 18% 12%;
+  --color-muted-foreground: 215 20% 50%;
+  --color-accent: 220 18% 14%;
   --color-accent-foreground: 210 40% 92%;
   --color-destructive: 0 85% 55%;
   --color-destructive-foreground: 0 0% 100%;
-  --color-border: 215 20% 18%;
-  --color-input: 215 20% 18%;
+  --color-border: 215 18% 16%;
+  --color-input: 215 18% 16%;
   --color-ring: 190 95% 50%;
   --color-chart-1: 190 95% 50%;
   --color-chart-2: 45 95% 55%;
@@ -29,20 +29,14 @@
   --color-chart-4: 280 65% 60%;
   --color-chart-5: 0 85% 55%;
   --radius: 0.5rem;
-  --color-sidebar-background: 222 20% 8%;
+  --color-sidebar-background: 220 22% 8%;
   --color-sidebar-foreground: 210 40% 92%;
   --color-sidebar-primary: 190 95% 50%;
   --color-sidebar-primary-foreground: 222 20% 6%;
-  --color-sidebar-accent: 222 15% 14%;
+  --color-sidebar-accent: 220 18% 14%;
   --color-sidebar-accent-foreground: 210 40% 92%;
-  --color-sidebar-border: 215 20% 18%;
+  --color-sidebar-border: 215 18% 16%;
   --color-sidebar-ring: 190 95% 50%;
-
-  --color-warning: 45 95% 55%;
-  --color-critical: 0 85% 55%;
-  --color-success: 142 70% 45%;
-  --color-info: 190 95% 50%;
-  --color-cyber: 280 65% 60%;
 
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
@@ -60,54 +54,50 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(222 20% 8%);
+  background: hsl(220 22% 7%);
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(215 20% 25%);
-  border-radius: 2px;
+  background: hsl(215 18% 22%);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(215 20% 35%);
+  background: hsl(215 18% 30%);
 }
 
 /* Glow effects */
 .glow-cyan {
-  box-shadow: 0 0 12px hsl(190 95% 50% / 0.15), 0 0 4px hsl(190 95% 50% / 0.1);
+  box-shadow: 0 0 20px hsl(190 95% 50% / 0.2), 0 0 6px hsl(190 95% 50% / 0.15), inset 0 1px 0 hsl(190 95% 50% / 0.05);
 }
 .glow-amber {
-  box-shadow: 0 0 12px hsl(45 95% 55% / 0.15), 0 0 4px hsl(45 95% 55% / 0.1);
+  box-shadow: 0 0 20px hsl(45 95% 55% / 0.2), 0 0 6px hsl(45 95% 55% / 0.15), inset 0 1px 0 hsl(45 95% 55% / 0.05);
 }
 .glow-red {
-  box-shadow: 0 0 12px hsl(0 85% 55% / 0.15), 0 0 4px hsl(0 85% 55% / 0.1);
+  box-shadow: 0 0 20px hsl(0 85% 55% / 0.2), 0 0 6px hsl(0 85% 55% / 0.15), inset 0 1px 0 hsl(0 85% 55% / 0.05);
+}
+.glow-emerald {
+  box-shadow: 0 0 20px hsl(142 70% 45% / 0.2), 0 0 6px hsl(142 70% 45% / 0.15), inset 0 1px 0 hsl(142 70% 45% / 0.05);
+}
+.glow-purple {
+  box-shadow: 0 0 20px hsl(280 65% 60% / 0.2), 0 0 6px hsl(280 65% 60% / 0.15), inset 0 1px 0 hsl(280 65% 60% / 0.05);
 }
 
 /* Pulse animation for live indicators */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  50% { opacity: 0.3; }
 }
 .animate-pulse-dot {
-  animation: pulse-dot 2s ease-in-out infinite;
+  animation: pulse-dot 1.5s ease-in-out infinite;
 }
 
 /* Scan line effect */
 @keyframes scanline {
   0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
-}
-.scanline::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, hsl(190 95% 50% / 0.3), transparent);
-  animation: scanline 4s linear infinite;
+  100% { transform: translateY(100vh); }
 }
 
 /* Ticker animation */
@@ -116,13 +106,55 @@
   100% { transform: translateX(-50%); }
 }
 .animate-ticker {
-  animation: ticker 30s linear infinite;
+  animation: ticker 40s linear infinite;
 }
 
 /* Data grid lines */
 .grid-overlay {
   background-image: 
-    linear-gradient(hsl(215 20% 18% / 0.3) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(215 20% 18% / 0.3) 1px, transparent 1px);
-  background-size: 20px 20px;
+    linear-gradient(hsl(190 95% 50% / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(190 95% 50% / 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Panel gradient borders */
+.panel-glow-cyan {
+  border-color: hsl(190 95% 50% / 0.25);
+  background: linear-gradient(180deg, hsl(190 95% 50% / 0.03) 0%, transparent 40%);
+}
+.panel-glow-red {
+  border-color: hsl(0 85% 55% / 0.25);
+  background: linear-gradient(180deg, hsl(0 85% 55% / 0.03) 0%, transparent 40%);
+}
+.panel-glow-amber {
+  border-color: hsl(45 95% 55% / 0.25);
+  background: linear-gradient(180deg, hsl(45 95% 55% / 0.03) 0%, transparent 40%);
+}
+.panel-glow-purple {
+  border-color: hsl(280 65% 60% / 0.25);
+  background: linear-gradient(180deg, hsl(280 65% 60% / 0.03) 0%, transparent 40%);
+}
+.panel-glow-emerald {
+  border-color: hsl(142 70% 45% / 0.25);
+  background: linear-gradient(180deg, hsl(142 70% 45% / 0.03) 0%, transparent 40%);
+}
+
+/* Ticker gradient masks */
+.ticker-mask {
+  mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+/* Subtle noise texture */
+.noise-bg {
+  position: relative;
+}
+.noise-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
 }
