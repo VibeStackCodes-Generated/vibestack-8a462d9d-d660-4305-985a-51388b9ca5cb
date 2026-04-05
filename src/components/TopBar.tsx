@@ -1,76 +1,73 @@
 import { useState, useEffect } from 'react';
-import { Shield, Wifi, Activity, Clock, Globe, Zap, Radio } from 'lucide-react';
-import { globalStats } from '@/lib/data';
+import { Wifi, Activity, Clock, Zap, Radio, TriangleAlert } from 'lucide-react';
 
 export function TopBar() {
   const [time, setTime] = useState(new Date());
-  const [blinkOn, setBlinkOn] = useState(true);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
-    const blinker = setInterval(() => setBlinkOn(p => !p), 800);
-    return () => { clearInterval(timer); clearInterval(blinker); };
+    return () => clearInterval(timer);
   }, []);
 
   const utcTime = time.toISOString().slice(11, 19);
-  const localTime = time.toLocaleTimeString('en-US', { hour12: false });
 
   return (
-    <header className="h-13 bg-gradient-to-r from-[hsl(220,25%,6%)] via-[hsl(220,25%,7%)] to-[hsl(220,25%,6%)] border-b border-cyan-500/15 flex items-center justify-between px-5 shrink-0">
-      <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2.5">
-          <div className="relative">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500/20 to-blue-600/20 border border-cyan-500/30 flex items-center justify-center">
-              <Globe className="w-4.5 h-4.5 text-cyan-400" />
-            </div>
-            <div className={`absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 border-[hsl(220,25%,6%)] ${blinkOn ? 'bg-emerald-400' : 'bg-emerald-400/40'}`} />
+    <header role="banner" className="h-12 bg-[hsl(225,22%,5%)] border-b border-[hsl(225,15%,12%)] flex items-center justify-between px-4 md:px-5 shrink-0">
+      <div className="flex items-center gap-3 md:gap-4">
+        {/* Logo */}
+        <div className="flex items-center gap-2.5" aria-label="VIBESTACK SENTINEL home">
+          <div className="relative w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, hsl(168 80% 50% / 0.15), hsl(262 70% 60% / 0.15))' }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke="hsl(168 80% 50%)" strokeWidth="1.5" />
+              <ellipse cx="12" cy="12" rx="10" ry="4.5" stroke="hsl(168 80% 50%)" strokeWidth="1" opacity="0.5" />
+              <circle cx="12" cy="12" r="2" fill="hsl(168 80% 50%)" />
+            </svg>
+            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 animate-pulse-glow" aria-hidden="true" />
           </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-bold text-sm tracking-widest text-cyan-400">GLOBAL</span>
-              <span className="font-bold text-sm tracking-widest text-white">SENTINEL</span>
+          <div className="hidden sm:block">
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-display font-bold text-[13px] tracking-[0.15em] text-teal-400">VIBESTACK</span>
+              <span className="font-display font-bold text-[13px] tracking-[0.15em] text-white">SENTINEL</span>
             </div>
-            <div className="text-[8px] font-mono text-cyan-400/50 tracking-[0.2em] -mt-0.5">INTELLIGENCE PLATFORM</div>
+            <div className="text-[7px] font-mono text-teal-500/50 tracking-[0.25em] -mt-0.5">INTELLIGENCE PLATFORM</div>
           </div>
         </div>
 
-        <div className="h-6 w-px bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent" />
+        <div className="h-5 w-px bg-[hsl(225,15%,14%)]" aria-hidden="true" />
 
-        <div className="hidden md:flex items-center gap-2">
-          <div className="flex items-center gap-1.5 bg-cyan-500/8 border border-cyan-500/20 rounded-md px-2.5 py-1">
-            <Zap className="w-3 h-3 text-cyan-400" />
-            <span className="text-[10px] font-mono font-medium text-cyan-400">AI ACTIVE</span>
+        {/* Status badges */}
+        <div className="hidden md:flex items-center gap-2" role="status" aria-label="System status">
+          <div className="flex items-center gap-1.5 bg-teal-500/8 border border-teal-500/15 rounded-md px-2 py-1">
+            <Zap className="w-3 h-3 text-teal-400" aria-hidden="true" />
+            <span className="text-[10px] font-mono font-medium text-teal-400">AI ONLINE</span>
           </div>
-          <div className="flex items-center gap-1.5 bg-emerald-500/8 border border-emerald-500/20 rounded-md px-2.5 py-1">
-            <Radio className="w-3 h-3 text-emerald-400" />
-            <span className="text-[10px] font-mono font-medium text-emerald-400">{globalStats.dataSourcesOnline} FEEDS</span>
+          <div className="flex items-center gap-1.5 bg-emerald-500/8 border border-emerald-500/15 rounded-md px-2 py-1">
+            <Radio className="w-3 h-3 text-emerald-400" aria-hidden="true" />
+            <span className="text-[10px] font-mono font-medium text-emerald-400">342 FEEDS</span>
           </div>
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        <div className="hidden md:flex items-center gap-3">
-          <div className="flex items-center gap-1.5 text-[10px] font-mono">
-            <Activity className="w-3 h-3 text-emerald-400" />
-            <span className="text-emerald-400/80">CONFIDENCE</span>
-            <span className="text-emerald-400 font-bold">{globalStats.aiConfidence}%</span>
+      <div className="flex items-center gap-3 md:gap-4">
+        <div className="hidden lg:flex items-center gap-3">
+          <div className="flex items-center gap-1.5 text-[10px] font-mono" role="status">
+            <Activity className="w-3 h-3 text-emerald-400" aria-hidden="true" />
+            <span className="text-[hsl(220,15%,48%)]">CONFIDENCE</span>
+            <span className="text-emerald-400 font-bold">94.2%</span>
           </div>
-          <div className="h-4 w-px bg-border" />
-          <div className="flex items-center gap-1.5 text-[10px] font-mono">
-            <Shield className="w-3 h-3 text-amber-400" />
-            <span className="text-amber-400/80">ALERTS</span>
-            <span className="text-amber-400 font-bold">{globalStats.activeAlerts}</span>
+          <div className="h-4 w-px bg-[hsl(225,15%,14%)]" aria-hidden="true" />
+          <div className="flex items-center gap-1.5 text-[10px] font-mono" role="status">
+            <TriangleAlert className="w-3 h-3 text-amber-400" aria-hidden="true" />
+            <span className="text-[hsl(220,15%,48%)]">ALERTS</span>
+            <span className="text-amber-400 font-bold">12</span>
           </div>
         </div>
-        <div className="h-6 w-px bg-gradient-to-b from-transparent via-border to-transparent" />
-        <div className="flex items-center gap-2.5">
+        <div className="h-5 w-px bg-[hsl(225,15%,14%)]" aria-hidden="true" />
+        <div className="flex items-center gap-2" aria-label={`UTC time: ${utcTime}`}>
           <div className="text-right">
-            <div className="text-[11px] font-mono font-semibold text-cyan-400 tabular-nums">{utcTime} <span className="text-cyan-400/50">UTC</span></div>
-            <div className="text-[9px] font-mono text-slate-500 tabular-nums">{localTime} LOCAL</div>
+            <div className="text-[11px] font-mono font-semibold text-teal-400 tabular-nums">{utcTime} <span className="text-teal-500/40">UTC</span></div>
           </div>
-          <div className="w-8 h-8 rounded-lg bg-slate-800/50 border border-slate-700/50 flex items-center justify-center">
-            <Clock className="w-4 h-4 text-slate-400" />
-          </div>
+          <Clock className="w-4 h-4 text-[hsl(220,15%,35%)]" aria-hidden="true" />
         </div>
       </div>
     </header>

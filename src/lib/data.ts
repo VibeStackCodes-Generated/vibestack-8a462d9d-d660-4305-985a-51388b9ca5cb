@@ -1,5 +1,3 @@
-// Simulated real-time intelligence data
-
 export interface NewsItem {
   id: string;
   title: string;
@@ -262,12 +260,12 @@ export const globalStats = {
 
 export function formatTimeAgo(date: Date): string {
   const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
-  if (seconds < 60) return `${seconds}s ago`;
+  if (seconds < 60) return seconds + 's ago';
   const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 60) return minutes + 'm ago';
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  return `${Math.floor(hours / 24)}d ago`;
+  if (hours < 24) return hours + 'h ago';
+  return Math.floor(hours / 24) + 'd ago';
 }
 
 export function getSeverityColor(severity: string): string {
